@@ -11,8 +11,8 @@
 --| ---------------------------------------------------------------------------
 --|
 --| FILENAME      : top_basys3.vhd
---| AUTHOR(S)     : Capt Phillip Warner
---| CREATED       : 01/22/2018 Last modified 02/09/2023
+--| AUTHOR(S)     : C3C Matiahna Thornton
+--| CREATED       : 01/22/2018 Last modified 02/20/2024
 --| DESCRIPTION   : This file implements the top level module for a BASYS 3 to utilize 
 --|					a seven-segment decoder for displaying hex values on seven-segment 
 --|					displays (7SD) according to 4-bit inputs provided by switches.
@@ -78,10 +78,9 @@ end top_basys3;
 
 architecture top_basys3_arch of top_basys3 is 
 	
-  -- declare the component of your top-level design unit under test (UUT)
-
 
   -- create wire to connect button to 7SD enable (active-low)
+signal w_7SD_EN_n : std_logic;
 
   
 begin
@@ -92,7 +91,8 @@ begin
 	
 	
 	-- CONCURRENT STATEMENTS ----------------------------
-	
+	w_7SD_EN_n <= not btnC;
+	an <= (0=> w_7SD_EN_n, others => '1');
 	-- wire up active-low 7SD anode (active low) to button (active-high)
 	-- display 7SD 0 only when button pushed
 	-- other 7SD are kept off
