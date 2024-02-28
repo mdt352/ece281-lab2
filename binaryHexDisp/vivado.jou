@@ -47,3 +47,9 @@ current_sim simulation_1
 close_sim
 launch_simulation
 source sevenSegDecoder_tb.tcl
+close_sim
+launch_simulation
+source sevenSegDecoder_tb.tcl
+close_sim
+launch_simulation
+source sevenSegDecoder_tb.tcl
