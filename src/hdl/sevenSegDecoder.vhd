@@ -41,20 +41,29 @@ architecture Behavioral of sevenSegDecoder is
 signal c_Sa , c_Sb, c_Sc, c_Sd, c_Se, c_Sf, c_Sg: std_logic;
 
 begin
-o_S(0) <= c_Sa;
-o_S(1) <= c_Sb;
-o_S(2) <= c_Sc;
-o_S(3) <= c_Sd;
-o_S(4) <= c_Se;
-o_S(5) <= c_Sf;
-o_S(6) <= c_Sg;
-
-c_Sa <= (i_D(2) and i_D(1) and not i_D(0)) or (i_D(3) and i_D(2) and not i_D(1)) or ( not i_D(3)and not i_D(2) and not i_D(1) and i_D(0)) or (i_D(3)and not i_D(2) and i_D(1) and i_D(0));
-c_Sg <= (not i_D(3) and i_D(2) and i_D(1) and i_D(0)) or (not i_D(3) and not i_D(2) and not i_D(1));
-c_Sb <= '1' when ((i_D = x"5") or (i_D = x"6") or (i_D = x"B") or (i_D = x"C") or (i_D = x"E") or (i_D = x"F")) else '0';
-c_Sc <= '1' when ((i_D = x"2") or (i_D = x"C") or (i_D = x"E") or (i_D = x"F")) else '0';
-c_Sd <= '1' when ((i_D = x"1") or (i_D = x"4") or (i_D = x"7") or (i_D = x"9") or (i_D = x"A") or (i_D = x"F")) else '0';
-c_Se <= '1' when ((i_D = x"1") or (i_D = x"3") or (i_D = x"4") or (i_D = x"5") or (i_D = x"7") or (i_D = x"9")) else '0';
-c_Sf <= '1' when ((i_D = x"1") or (i_D = x"2") or (i_D = x"3") or (i_D = x"7") or (i_D = x"C") or (i_D = x"D")) else '0';
+    o_S(0) <= c_Sa;
+    o_S(1) <= c_Sb;
+    o_S(2) <= c_Sc;
+    o_S(3) <= c_Sd;
+    o_S(4) <= c_Se;
+    o_S(5) <= c_Sf;
+    o_S(6) <= c_Sg;
+    
+    c_Sa <= (not i_D(3) and not i_D(2) and not i_D(1) and i_D(0)) or 
+            (i_D(3) and not i_D(2) and i_D(1) and i_D(0)) or 
+            (i_D(2)and not i_D(1) and not i_D(0)) or 
+            (i_D(3)and i_D(2) and not i_D(1));
+    c_Sg <= (not i_D(3) and i_D(2) and i_D(1) and i_D(0)) or
+            (not i_D(3) and not i_D(2) and not i_D(1));
+    c_Sc <= (not i_D(3) and not i_D(2) and i_D(1) and not i_D(0)) or 
+            (i_D(3) and i_D(2) and not i_D(0)) or 
+            (i_D(3)and i_D(2) and i_D(1));
+    c_Sd <= (not i_D(3) and i_D(2) and not i_D(1) and not i_D(0)) or 
+            (i_D(2) and i_D(1) and i_D(0)) or 
+            (i_D(3)and not i_D(2) and i_D(1) and not i_D(0)) or 
+            (not i_D(2)and not i_D(1) and i_D(0));
+    c_Sb <= '1' when ((i_D = x"5") or (i_D = x"6") or (i_D = x"B") or (i_D = x"C") or (i_D = x"E") or (i_D = x"F")) else '0';
+    c_Se <= '1' when ((i_D = x"1") or (i_D = x"3") or (i_D = x"4") or (i_D = x"5") or (i_D = x"7") or (i_D = x"9")) else '0';
+    c_Sf <= '1' when ((i_D = x"1") or (i_D = x"2") or (i_D = x"3") or (i_D = x"7") or (i_D = x"C") or (i_D = x"D")) else '0';
 end Behavioral;
 
