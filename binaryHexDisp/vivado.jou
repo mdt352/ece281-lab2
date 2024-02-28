@@ -27,3 +27,23 @@ set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property PROGRAM.FILE {C:/Users/Matiahna.Thornton/Downloads/ECE_281/Lab2/ece281-lab2/binaryHexDisp/binaryHexDisp.runs/impl_1/top_basys3.bit} [get_hw_devices xc7a35t_0]
 program_hw_devices [get_hw_devices xc7a35t_0]
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top top_basys3 [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sim_1
+launch_simulation
+source top_basys3.tcl
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top sevenSegDecoder_tb [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sim_1
+current_sim simulation_1
+close_sim
+launch_simulation
+source sevenSegDecoder_tb.tcl
